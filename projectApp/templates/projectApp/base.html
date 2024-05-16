@@ -1,0 +1,82 @@
+{% load static %} {% load bootstrap_icons %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Selling</title>
+    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+    <style>
+      .custom-table {
+          background-color: #e0fce6; /* Set the background color to green */
+      }
+  </style>
+  </head>
+  <body class="d-flex flex-column text-center vh-100">
+    <nav class="navbar navbar-expand-lg bg-success py-2 text-white">
+      <div class="container-fluid mx-5">
+        <a class="navbar-brand" href="{% url 'products' %}">
+          <img
+            src="{% static 'projectApp/images/logo.png' %}"
+            style="height: 120px; width: 100px"
+            alt="Logo"
+          />
+        </a>
+        <div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="text-white">{% bs_icon 'list' size='3rem' %}</span>
+          </button>
+          <span class="text-white d-lg-none"
+            >{% bs_icon 'box-arrow-right' size='3rem' %}</span
+          >
+        </div>
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav gap-5 justify-content-center flex-fill">
+            <li class="nav-item">
+              <a class="nav-link link-light font h4" href="{% url 'products' %}"
+                >Products</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link-light h4" href="{% url 'add' %}"
+                >Add Product</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link-light h4" href="{% url 'update' %}"
+                >Update Product</a
+              >
+            </li>
+          </ul>
+          <a
+            class="nav-link text-white h3 d-none d-lg-block"
+            href="{% url 'history' %}"
+            >{% bs_icon 'bag-fill' size='2rem' %}</a
+          >
+          <a
+            class="nav-link text-white d-lg-block"
+            href="{% url 'userLogout' %}"
+            >{% bs_icon 'box-arrow-right' size='2rem' %}</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      {% block content %} {% endblock %} {% for message in messages %}
+    </div>
+  </body>
+  <div class=" py-4  alert-{{ message.tags }} fixed-bottom h3 fw-bold  ">
+    {{ message }}
+  </div>
+  {% endfor %}
+</html>

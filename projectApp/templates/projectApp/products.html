@@ -1,0 +1,29 @@
+{% extends 'projectApp/base.html' %} {% block content %}
+
+<div class="container mt-3">
+  {% load bootstrap_icons %}
+  <table class="table table-bordered mr-5 table-hover custom-table">
+    <thead class="table-dark">
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Details</th>
+      <th>Delete</th>
+    </thead>
+    {% for product in products %}
+    <tr>
+      <td>{{ product.name }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.price }} $</td>
+      <td><a href="{% url 'product' product.id %}">Show</a></td>
+      <td>
+        <a href="{% url 'delete' product.id %}"
+          >{% bs_icon 'trash' size='2rem' color='red' %}</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock %}

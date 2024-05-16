@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>signup</title>
+    {% load bootstrap5 %} {% bootstrap_css %}
+  </head>
+  <body
+    class="d-flex flex-column align-items-center vh-100 justify-content-center bg-success"
+  >
+    <a class="navbar-brand" href="{% url 'products' %}">
+      <img
+        src="{% static 'projectApp/images/logo.png' %}"
+        style="height: 200px; width: 200px"
+        alt="Logo"
+      />
+    </a>
+    <form method="post" class="w-25 text-white">
+      <h2>Register</h2>
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="username"
+          name="username"
+          class="form-control"
+          id="username"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          id="password"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Confirm Password</label>
+        <input
+          type="password"
+          name="passwordCon"
+          class="form-control"
+          id="passwordCon"
+          required
+        />
+      </div>
+
+      <div class="d-flex gap-5 justify-content-center">
+        <button type="submit" class="btn bg-white w-25 h3 fw-bold">
+          Sign up
+        </button>
+        <a href="/login" class="btn bg-white w-25 h3 fw-bold"> Log in</a>
+      </div>
+    </form>
+  </body>
+  {% for message in messages %}
+  <div
+    class=" alert-{{ message.tags }} mt-5 h3  text-white bg-dark px-4 py-2 rounded-3     "
+  >
+    {{ message }}
+  </div>
+  {% endfor %}
+</html>
