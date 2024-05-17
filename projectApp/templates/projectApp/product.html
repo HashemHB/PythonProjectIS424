@@ -1,3 +1,27 @@
 {% extends 'projectApp/base.html' %} {% block content %}
-
+<div class="card mx-auto" style="width: 22rem">
+  <img
+    src="https://placehold.co/1000x600"
+    class="card-img-top w-auto h-auto"
+    alt="..."
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name }}</h5>
+    <p class="card-text">{{ product.description }}</p>
+    <p class="card-text">{{ product.price }} $</p>
+    <div class="d-flex gap-4 justify-content-between">
+      <a href="{% url 'purchase' product.id 'added'  %}" class="btn btn-primary"
+        >Add</a
+      ><a
+        href="{% url 'purchase' product.id 'purchased' %}"
+        class="btn btn-primary"
+        >Purchase</a
+      ><a
+        href="{% url 'purchase' product.id 'rented'  %}"
+        class="btn btn-primary"
+        >Rent</a
+      >
+    </div>
+  </div>
+</div>
 {% endblock %}

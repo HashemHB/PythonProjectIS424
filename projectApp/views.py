@@ -100,3 +100,5 @@ def update(request , product_id=""):
         messages.success(request, f'Product have been updated successfully!')
 
         return redirect('update')
+    print(product_id)
+    return render(request, 'projectApp/update.html', {'products': product , 'productID': product_id})
