@@ -1,3 +1,12 @@
 {% extends 'projectApp/base.html' %} {% block content %}
-
+<div class="container mx-auto">
+    {% load bootstrap_icons %}
+    <div>
+      <span>{% bs_icon 'bag-check-fill' size='10rem' color='green' %}</span>
+      <p class="my-3 h3">Your purchase have been done successfully</p>
+      <a class="btn btn-primary h4" href="/history"
+        >Check your order in your orders history</a
+      >
+    </div>
+  </div>
 {% endblock %}

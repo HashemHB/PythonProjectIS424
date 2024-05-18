@@ -65,6 +65,11 @@ def products(request):
    return render(request, 'projectApp/products.html',{'products': products})
 
 @login_required
+def product(request , product_id):
+   product = prodcutModel.objects.get(id=product_id)
+   return render(request, 'projectApp/product.html',{'product': product})
+
+@login_required
 def add(request):
    if request.method == 'POST':
         print(request.POST)
@@ -102,3 +107,53 @@ def update(request , product_id=""):
         return redirect('update')
     print(product_id)
     return render(request, 'projectApp/update.html', {'products': product , 'productID': product_id})
+
+
+@login_required
+def userLogout(request):
+    logout(request)
+    return redirect('login')
+
+@login_required
+def delete(request, product_id):
+    product = prodcutModel.objects.get(id=product_id)
+    product.delete()
+    messages.success(request, f'Product have been deleted successfully!')
+    return redirect('/items/products')
+
+@login_required
+def deleteFromHistory(request, purchase_id):
+    purchase = Purchase.objects.get(id=purchase_id)
+    purchase.delete()
+    messages.success(request, f'Product have been deleted successfully!')
+    return redirect('/history')
+
+@login_required
+def purchase(request, product_id , status):
+    user = User.objects.get(id=request.user.id)
+    product = prodcutModel.objects.get(id=product_id)
+    Purchase.objects.create(user=user, product=product , status=status)
+    if status == 'purchased':
+        messages.success(request, f'Product have been purchased successfully!')
+        return render(request, 'projectApp/purchase.html')
+    elif status == 'added':
+        messages.success(request, f'Product have been added successfully!')
+        return redirect('/history')
+    elif status == 'rented':
+        messages.success(request, f'Product have been rented successfully!')
+        return redirect('/history')
+
+@login_required
+def history(request):
+    user = User.objects.get(id=request.user.id)
+    purchases = Purchase.objects.filter(user=user)
+    return render(request, 'projectApp/history.html', {'purchases': purchases})
+
+@login_required
+def updatedPurchase(request,purchase_id):
+    user = User.objects.get(id=request.user.id)
+    purchase = Purchase.objects.get(user_id=user.id , id=purchase_id)
+    purchase.status= 'purchased' 
+    purchase.save()
+    messages.success(request, f'Product status have been updated successfully!')
+    return redirect('/history')
