@@ -1,3 +1,39 @@
 {% extends 'projectApp/base.html' %} {% block content %}
-
+<div class="container mt-3">
+    {% load bootstrap_icons %}
+    <table class="table table-bordered mr-5 table-hover">
+      <thead class="table-dark">
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Action</th>
+        <th>Delete</th>
+      </thead>
+      {% for purchase in purchases %}
+      <tr>
+        <td>{{ purchase.product.name }}</td>
+        <td>{{ purchase.product.description }}</td>
+        <td>{{ purchase.product.price }} $</td>
+        <td>{{ purchase.status }}</td>
+        {% if purchase.status == 'rented' or purchase.status == 'added' %}
+        <td>
+          <a
+            href="{% url 'updated-purchase' purchase.id %}"
+            class="btn btn-primary"
+            >Purchase</a
+          >
+        </td>
+        {% else %}
+        <td></td>
+        {% endif %}
+        <td>
+          <a href="{% url 'delete-purchase' purchase.id %}"
+            >{% bs_icon 'trash' size='2rem' color='red' %}</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 {% endblock %}

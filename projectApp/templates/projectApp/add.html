@@ -1,4 +1,55 @@
-{% extends 'projectApp/base.html' %} 
-{% block content %}
-
+{% extends 'projectApp/base.html' %} {% block content %}
+<h1 class="mb-4">Add product</h1>
+<form method="POST">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-12">
+      <div class="input-group flex-nowrap">
+        <span class="input-group-text" id="addon-wrapping">Product Name</span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="product name"
+          name="name"
+          aria-describedby="addon-wrapping"
+          required
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="input-group flex-nowrap">
+        <span class="input-group-text" id="addon-wrapping">Price</span>
+        <input
+          type="number"
+          class="form-control"
+          name="price"
+          placeholder="$"
+          required
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="input-group flex-nowrap">
+        <span class="input-group-text" id="addon-wrapping">Description</span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="description"
+          name="description"
+          aria-describedby="addon-wrapping"
+          required
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12 text-center">
+      <button class="btn btn-primary w-50">Add</button>
+    </div>
+  </div>
+</form>
 {% endblock %}
